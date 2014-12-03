@@ -1,0 +1,11 @@
+If you want to build it just issue:
+snappy build package-dir
+
+Known issues so far:
+docker.svg, it is a png saved as a svg for now.
+apparmor for docker is not here yet and will come soon; but containers are confined.
+package.yaml has 'maintainer' for now, will be changed to 'vendor' as soon as I can build with this string.
+
+Then copy it to  your snappy instance and install it (snappy install docker_1.3.2.001_amd64.snap).
+
+If you need to add proxies or dns, look at meta/readme.md.
