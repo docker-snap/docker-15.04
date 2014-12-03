@@ -1,0 +1,20 @@
+For building docker, you need to be either in a vm or a bare host. 
+It doesn't work in a container as building process is done in a docker container, you need direct connection to internet, the build process fails even if env proxies are set.
+
+I had to build it in a vivid host, cause it would segfault in snappy instance if not (only the kernel is different, as it is build in a trusty conatiner).
+
+to build it:
+apt-get install git docker.io make
+then:
+git clone https://git@github.com/docker/docker
+
+just modify path in this file
+   vendor/src/github.com/docker/libcontainer/apparmor/setup.go 
+at two places
+ DefaultProfilePath = "/var/lib/apparmor/profiles/docker"
+ cmd.Dir = "/var/lib/apparmor/profiles"
+
+then sudo make, and wait for it to be build
+
+the binary that we need will be in bundles/1.3.2-dev/binary/
+

@@ -1,0 +1,10 @@
+{
+    "unit_description": "Docker Application Container Engine Framework For Snappy",
+    "service_environmentfile": "${CLICK_PACKAGE_PATH}/etc/docker.conf",
+    "service_environment": "DOCKER_TMPDIR=/writable/cache/docker",
+    "service_workingdirectory": "${CLICK_PACKAGE_PATH}",
+    "service_limitnofile": "1048576",
+    "service_limitnproc": "1048576",
+    "service_execstart": "${CLICK_PACKAGE_PATH}/bin/docker -D -G docker -d -g /writable/cache/docker -H unix:///var/run/docker.sock"
+}
+
