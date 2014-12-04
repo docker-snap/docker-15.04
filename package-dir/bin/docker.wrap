@@ -4,7 +4,7 @@
 SNAP_APP_PATH=`pwd`
 
 #Set cache directory:
-SNAP_APP_PDATA_PATH=/writable/cache/docker
+SNAP_APP_PDATA_PATH=/var/lib/apps/docker
 
 #Get docker config:
 source ${SNAP_APP_PATH}/etc/docker.conf
