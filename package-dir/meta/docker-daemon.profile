@@ -20,6 +20,12 @@
   #include <abstractions/openssl>
   #include <abstractions/ssl_certs>
 
+  # FIXME: app upgrades don't perform migration yet. When they do, remove
+  # these two rules and update package-dir/bin/docker.wrap as per its comments.
+  # See: https://app.asana.com/0/21120773903349/21160815722783
+  /var/lib/apps/@{APP_PKGNAME}/   w,
+  /var/lib/apps/@{APP_PKGNAME}/** wl,
+
   # Read-only for the install directory
   @{CLICK_DIR}/@{APP_PKGNAME}/                   r,
   @{CLICK_DIR}/@{APP_PKGNAME}/@{APP_VERSION}/    r,

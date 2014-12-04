@@ -1,5 +1,5 @@
 name: docker
-version: 1.3.2.003
+version: 1.3.2.004
 architecture: amd64
 icon: meta/docker.svg
 maintainer: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>

@@ -5,6 +5,9 @@ SNAP_APP_PATH=`pwd`
 
 #Set cache directory:
 SNAP_APP_PDATA_PATH=/var/lib/apps/docker
+# once data migration on upgrades is completed, remove the FIXME rule in
+# package-dir/meta/docker-daemon.profile, then change this to:
+#SNAP_APP_PDATA_PATH=/var/lib/$SNAP_APP_PATH
 
 #Get docker config:
 source ${SNAP_APP_PATH}/etc/docker.conf
