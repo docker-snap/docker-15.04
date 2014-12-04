@@ -1,5 +1,5 @@
 name: docker
-version: 1.3.2.001
+version: 1.3.2.003
 architecture: amd64
 icon: meta/docker.svg
 maintainer: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
@@ -13,5 +13,5 @@ integration:
      bin-path: bin/docker
   framework:
     framework: meta/docker.framework
-  daemon:
+  docker:
     apparmor-profile: meta/docker-daemon.profile
