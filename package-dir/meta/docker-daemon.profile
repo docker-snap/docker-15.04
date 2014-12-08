@@ -110,4 +110,6 @@
 
   # We'll want to adjust this to support --security-opts...
   change_profile -> docker-default,
+  signal (send) peer=docker-default,
+  ptrace (read, trace) peer=docker-default,
 }
