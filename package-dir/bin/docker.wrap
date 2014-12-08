@@ -3,11 +3,11 @@
 #Get working directory:
 SNAP_APP_PATH=`pwd`
 
-#Set cache directory:
-SNAP_APP_PDATA_PATH=/var/lib/apps/docker
-# once data migration on upgrades is completed, remove the FIXME rule in
-# package-dir/meta/docker-daemon.profile, then change this to:
-#SNAP_APP_PDATA_PATH=/var/lib/$SNAP_APP_PATH
+#Set docker data directory:
+SNAP_APP_PDATA_PATH=/var/lib/${SNAP_APP_PATH}
+
+#Create docker data directory
+mkdir -p ${SNAP_APP_PDATA_PATH}
 
 #Get docker config:
 source ${SNAP_APP_PATH}/etc/docker.conf
@@ -27,4 +27,5 @@ export ftp_proxy=${FTP_PROXY}
 #Uncomment to have docker debug messages in journalctl -f
 #DEBUG="-D" 
 
+cd ${SNAP_APP_PDATA_PATH}
 ${SNAP_APP_PATH}/bin/docker ${DEBUG} -G docker -d -g ${SNAP_APP_PDATA_PATH} -H unix:///var/run/docker.sock ${DOCKER_OPTIONS}
