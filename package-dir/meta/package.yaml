@@ -1,5 +1,5 @@
 name: docker
-version: 1.3.2.005
+version: 1.3.2.006
 architecture: amd64
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
@@ -9,9 +9,8 @@ services:
     description: The docker app deployment mechanism
     start: bin/docker.wrap
 integration:
-  cli:
-     bin-path: bin/docker
   framework:
     framework: meta/docker.framework
   docker:
     apparmor-profile: meta/docker-daemon.profile
+    bin-path: bin/docker
