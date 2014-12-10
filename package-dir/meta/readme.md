@@ -1,11 +1,9 @@
 Docker Framework
-
-
 This is the docker app deployment mechanism.
 
 Actual docker version: 1.3.2.
 
-Apparmor profiles have been moved to /var/lib/apparmor/profiles.
+Apparmor profiles have been moved to /var/lib/apparmor/profiles, default profile as been modified.
 Data is stored in /var/lib/apps/docker/${version_of_snap_package}/.
 
 If you need to pass through proxies or dns, edit /apps/docker/current/etc/docker.conf accordingly and restart the docker service:
