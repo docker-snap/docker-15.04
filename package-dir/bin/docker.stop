@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#This is a script to place some commands at systemd stop time
+
+DEBUG="off"
+
+echo_it() {
+	if [ "$DEBUG" == "on" ]; then
+		echo "${1}"
+	fi
+}
+
+echo_it "Stopping docker service"

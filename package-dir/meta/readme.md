@@ -13,4 +13,8 @@ HTTP_PROXY=http://your.proxy:3128
 HTTPS_PROXY=http://your.proxy:3128
 DOCKER_OPTIONS="--dns 8.8.8.8"
 
+If you need privileged access, you can issue 'docker-privilege on'. But the confinment will be nearly inexistant.
+
+docker can read and write to your home/apps/docker/** directory, place your Dockerfile, there.
+
 sudo systemctl restart docker_docker_${version_of_snap_package}.service

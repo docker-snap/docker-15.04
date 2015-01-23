@@ -1,16 +1,21 @@
 name: docker
-version: 1.3.3.001
+version: 1.3.3.002
 architecture: amd64
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
-frameworks: ubuntu-core-15.04-dev1
+type: framework
 services:
   - name: docker
     description: The docker app deployment mechanism
-    start: bin/docker.wrap
+    start: bin/docker.start
+    stop: bin/docker.stop
+    poststop: bin/docker.poststop
 integration:
   framework:
     framework: meta/docker.framework
   docker:
     apparmor-profile: meta/docker-daemon.profile
     bin-path: bin/docker
+  docker-privilege:
+    bin-path: bin/docker-privilege
+

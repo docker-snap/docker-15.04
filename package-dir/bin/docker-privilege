@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+usage () {
+    echo "This will enable privileged mode in docker"
+    echo "To use it do:"
+    echo "docker-privilege on       #to enable privilege mode"
+    echo "docker-privilege off      #to disable privilege mode"
+    echo "docker-priviled status    #to display current status"
+}
+
+case $1 in
+    on)
+        echo "enabling privilege mode"
+		sudo cp meta/docker-daemon.priv meta/docker-daemon.profile
+		sudo aa-profile-hook -f
+	;;
+    off)
+        echo "disabling privilege mode"
+		sudo cp meta/docker-daemon.unpriv meta/docker-daemon.profile
+		sudo aa-profile-hook -f
+	;;
+    status)
+        echo "Actual status (by the file, not by audit) is:"
+        sudo grep -e "PRIVILEGED###" /var/lib/apparmor/profiles/profile_docker_docker_1.*
+	;;
+    *)
+        usage
+        ;;
+esac

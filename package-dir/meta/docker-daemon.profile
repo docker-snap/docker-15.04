@@ -9,6 +9,8 @@
 
 #include <tunables/global>
 
+###UNPRIVILEGED###
+
 # Specified profile variables
 ###VAR###
 
@@ -32,8 +34,8 @@
   @{CLICK_DIR}/@{APP_PKGNAME}/@{APP_VERSION}/**  mrklix,
 
   # Writable home area
-  owner @{HOMEDIRS}/apps/@{APP_PKGNAME}/   rw,
-  owner @{HOMEDIRS}/apps/@{APP_PKGNAME}/** mrwklix,
+  @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/   rw,
+  @{HOMEDIRS}/*/apps/@{APP_PKGNAME}/** mrwklix,
 
   # Read-only system area for other versions
   /var/lib/apps/@{APP_PKGNAME}/   r,
@@ -112,4 +114,31 @@
   change_profile -> docker-default,
   signal (send) peer=docker-default,
   ptrace (read, trace) peer=docker-default,
+
+#cf bug 1411639
+  /dev/dm-* rw,
+  /dev/net/ r,
+  /dev/snd/ r,
+  /dev/ r,
+  /dev/block/ r,
+  /dev/bsg/ r,
+  /dev/char/ r,
+  /dev/cpu/ r,
+  /dev/disk/ r,
+  /dev/disk/by-id/ r,
+  /dev/disk/by-label/ r,
+  /dev/disk/by-partlabel/ r,
+  /dev/disk/by-partuuid/ r,
+  /dev/disk/by-path/ r,
+  /dev/disk/by-uuid/ r,
+  /dev/hugepages/ r,
+  /dev/input/ r,
+  /dev/input/by-path/ r,
+
+   /proc r,
+   /dev/mapper/ r,
+   /dev/mqueue/ r,
+
+#New need
+  /dev/shm/aufs.xino rw,
 }
