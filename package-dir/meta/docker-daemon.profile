@@ -141,4 +141,5 @@
 
 #New need
   /dev/shm/aufs.xino rw,
+  /proc/fs/aufs/plink_maint rw,
 }

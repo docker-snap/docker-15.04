@@ -1,6 +1,6 @@
 #!/bin/bash
-DEBUG="on"
-#DEBUG="off"
+#DEBUG="on"
+DEBUG="off"
 
 #This script is intended to remove /dev/mapper 
 # entries that may still remain after docker

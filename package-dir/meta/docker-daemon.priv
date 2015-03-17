@@ -111,7 +111,9 @@
   /sys/kernel/security/apparmor/** rw,
 
   # We'll want to adjust this to support --security-opts...
-  change_profile -> unconfined,
+  change_profile -> *,
+#  signal (send) peer=*,
+#  ptrace (read, trace) peer=*,
   signal (send) peer=docker-default,
   ptrace (read, trace) peer=docker-default,
 
@@ -141,7 +143,8 @@
 
 #New need
   /dev/shm/aufs.xino rw,
-  
+  /proc/fs/aufs/plink_maint rw,  
   /dev/** mrwklix,
+  /proc/** mrwklix,
   
 }
