@@ -1,5 +1,5 @@
 name: docker
-version: 1.3.3.002
+version: 1.3.3.002-1
 architecture: amd64
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
@@ -10,12 +10,12 @@ services:
     start: bin/docker.start
     stop: bin/docker.stop
     poststop: bin/docker.poststop
+binaries:
+  - name: bin/docker
+    security-policy: docker_docker_1.3.3.002-1
+  - name: bin/docker-privilege
 integration:
   framework:
     framework: meta/docker.framework
   docker:
     apparmor-profile: meta/docker-daemon.profile
-    bin-path: bin/docker
-  docker-privilege:
-    bin-path: bin/docker-privilege
-
