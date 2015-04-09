@@ -25,13 +25,14 @@ function select_docker {
           echo "unknown platform for snappy-magic: $platform. remember to file a bug or better yet: fix it :)"
           ;;
     esac
+
 }
 
-DOCKER_CMD=`select_docker`
+select_docker
 if [ "${SNAPP_OLD_PWD}" == "" ]; then
 	${DOCKER_CMD} "$@"
 else
 	cd ${SNAPP_OLD_PWD}
-	${$DOCKER_CMD} "$@"
+	${DOCKER_CMD} "$@"
 fi
 
