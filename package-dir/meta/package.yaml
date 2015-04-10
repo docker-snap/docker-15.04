@@ -1,21 +1,24 @@
 name: docker
-version: 1.3.3.002-1
-architecture: amd64
+version: 1.5.0.002
+architecture: [amd64, armhf]
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
 type: framework
 services:
-  - name: docker
+  - name: docker-daemon
     description: The docker app deployment mechanism
     start: bin/docker.start
     stop: bin/docker.stop
     poststop: bin/docker.poststop
+    security-policy:
+      apparmor: meta/docker-daemon.apparmor
+      seccomp: meta/docker-daemon.seccomp
 binaries:
   - name: bin/docker
-    security-policy: docker_docker_1.3.3.002-1
+    caps:
+      - docker_client
+      - networking
   - name: bin/docker-privilege
-integration:
-  framework:
-    framework: meta/docker.framework
-  docker:
-    apparmor-profile: meta/docker-daemon.profile
+    security-policy:
+      apparmor: meta/docker-privilege.apparmor
+      seccomp: meta/docker-privilege.seccomp

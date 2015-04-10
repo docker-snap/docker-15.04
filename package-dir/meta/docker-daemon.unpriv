@@ -58,9 +58,11 @@
   /run/@{APP_PKGNAME}.sock rw,
 
   # Wide read access to /proc, but somewhat limited writes for now
+  @{PROC}/ r,
   @{PROC}/** r,
   @{PROC}/[0-9]*/attr/exec w,
   @{PROC}/sys/net/** w,
+  @{PROC}/[0-9]*/cmdline r,
 
   # Wide read access to /sys
   /sys/** r,
@@ -108,6 +110,7 @@
   /etc/apparmor*/** r,
   /var/lib/apparmor/profiles/docker rw,
   /etc/apparmor.d/cache/docker* w,
+  /etc/apparmor.d/cache/.features w,
   /sys/kernel/security/apparmor/** rw,
 
   # We'll want to adjust this to support --security-opts...
@@ -142,4 +145,10 @@
 #New need
   /dev/shm/aufs.xino rw,
   /proc/fs/aufs/plink_maint rw,
+
+#2015-04-09:
+  /bin/chown ixr,
+  capability sys_resource,
+  /sbin/killall5 ixr,
+  /sbin/dmsetup ixr,
 }
