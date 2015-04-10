@@ -12,7 +12,7 @@ index d91a9a1..6b790af 100644
  
  var (
 diff --git a/vendor/src/github.com/docker/libcontainer/apparmor/gen.go b/vendor/src/github.com/docker/libcontainer/apparmor/gen.go
-index 825e646..bbe8407 100644
+index 825e646..c248ce2 100644
 --- a/vendor/src/github.com/docker/libcontainer/apparmor/gen.go
 +++ b/vendor/src/github.com/docker/libcontainer/apparmor/gen.go
 @@ -22,40 +22,158 @@ profile {{.Name}} flags=(attach_disconnected,mediate_deleted) {
@@ -42,8 +42,8 @@ index 825e646..bbe8407 100644
 +  # Allow us to ptrace ourselves
 +  ptrace peer=@{profile_name},
 +  # Allow docker daemon to ptrace us and send us signals
-+  ptrace (readby, tracedby) peer="docker_docker*",
-+  signal (receive) peer="docker_docker*",
++  ptrace (readby, tracedby) peer="docker_docker{,-daemon}_*",
++  signal (receive) peer="docker_docker{,-daemon}_*",
 +
 +  # ignore DENIED message on / remount
 +  deny mount options=(ro, remount) -> /,

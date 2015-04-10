@@ -19,3 +19,5 @@ binaries:
       - docker_client
       - networking
   - name: bin/docker-privilege
+    apparmor: meta/docker-privilege.apparmor
+    seccomp: meta/docker-privilege.seccomp
