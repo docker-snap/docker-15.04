@@ -110,6 +110,7 @@
   /etc/apparmor*/** r,
   /var/lib/apparmor/profiles/docker rw,
   /etc/apparmor.d/cache/docker* w,
+  /etc/apparmor.d/cache/.features w,
   /sys/kernel/security/apparmor/** rw,
 
   # We'll want to adjust this to support --security-opts...
