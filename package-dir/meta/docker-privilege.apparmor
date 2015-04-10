@@ -199,4 +199,20 @@
   # yucky-- we shouldn't be modifying files in the install directory because it
   # will break snappy verify in the future. For now, allow it
   @{CLICK_DIR}/@{APP_PKGNAME}/@{APP_VERSION}/meta/docker-daemon.apparmor w,
+
+  # Remove these once we force the user to use 'sudo docker-privilege ...'
+  #include <abstractions/authentication>
+  /usr/bin/sudo ixr,
+  /etc/sudoers r,
+  /etc/sudoers.d/ r,
+  /etc/sudoers.d/* r,
+  /etc/environment r,
+  /etc/default/locale r,
+  capability setuid,
+  capability setgid,
+  capability audit_write,
+  capability sys_resource,
+  capability dac_override,
+  @{PROC}/[0-9]*/stat r,
+  @{PROC}/[0-9]*/fd/ r,
 }

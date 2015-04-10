@@ -4,21 +4,21 @@
 usage () {
     echo "This will enable privileged mode in docker"
     echo "To use it do:"
-    echo "sudo docker-privilege on       #to enable privilege mode"
-    echo "sudo docker-privilege off      #to disable privilege mode"
+    echo "docker-privilege on       #to enable privilege mode"
+    echo "docker-privilege off      #to disable privilege mode"
     echo "docker-priviled status         #to display current status"
 }
 
 case $1 in
     on)
         echo "enabling privilege mode"
-		cp meta/docker-daemon.priv meta/docker-daemon.apparmor
-		aa-profile-hook -f
+		sudo cp meta/docker-daemon.priv meta/docker-daemon.apparmor
+		sudo aa-profile-hook -f
 	;;
     off)
         echo "disabling privilege mode"
-		cp meta/docker-daemon.unpriv meta/docker-daemon.apparmor
-		aa-profile-hook -f
+		sudo cp meta/docker-daemon.unpriv meta/docker-daemon.apparmor
+		sudo aa-profile-hook -f
 	;;
     status)
         echo "Actual status (by the file, not by audit) is:"
