@@ -27,6 +27,9 @@
 # this gives away to much privilege and needs to be fixed
 /run/docker.sock rw,
 
+#added, but gives to much control
+/bin/pidof ixr,
+
 # docker binary wants to give these out, but we can't give these out to apps.
 # Let's block them and hope for the best
 deny capability net_admin,

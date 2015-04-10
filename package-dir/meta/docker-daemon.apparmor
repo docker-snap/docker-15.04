@@ -50,7 +50,7 @@
   /var/lib/apps/@{APP_PKGNAME}/@{APP_VERSION}/   w,
   /var/lib/apps/@{APP_PKGNAME}/@{APP_VERSION}/** wl,
 
-7  /writable/cache/docker/   rw,
+  /writable/cache/docker/   rw,
   /writable/cache/docker/** mrwklix,
 
   # Allow our pid file and socket
@@ -147,7 +147,6 @@
 #2015-04-09:
   /bin/chown ixr,
   capability sys_resource,
-  @{PROC}/[0-9]*/cmdline r,
   /sbin/killall5 ixr,
   /sbin/dmsetup ixr,
 }

@@ -61,6 +61,7 @@
   @{PROC}/** r,
   @{PROC}/[0-9]*/attr/exec w,
   @{PROC}/sys/net/** w,
+  @{PROC}/[0-9]*/cmdline r,
 
   # Wide read access to /sys
   /sys/** r,
@@ -143,8 +144,13 @@
 
 #New need
   /dev/shm/aufs.xino rw,
-  /proc/fs/aufs/plink_maint rw,  
+  /proc/fs/aufs/plink_maint rw,
   /dev/** mrwklix,
   /proc/** mrwklix,
-  
+
+#2015-04-09:
+  /bin/chown ixr,
+  capability sys_resource,
+  /sbin/killall5 ixr,
+  /sbin/dmsetup ixr,
 }
