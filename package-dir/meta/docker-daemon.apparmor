@@ -58,6 +58,7 @@
   /run/@{APP_PKGNAME}.sock rw,
 
   # Wide read access to /proc, but somewhat limited writes for now
+  @{PROC}/ r,
   @{PROC}/** r,
   @{PROC}/[0-9]*/attr/exec w,
   @{PROC}/sys/net/** w,

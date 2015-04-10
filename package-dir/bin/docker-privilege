@@ -22,7 +22,7 @@ case $1 in
 	;;
     status)
         echo "Actual status (by the file, not by audit) is:"
-        sudo grep -e "PRIVILEGED###" /var/lib/apparmor/profiles/profile_docker_docker_1.*
+        sudo grep -e "PRIVILEGED###" /var/lib/apparmor/profiles/profile_docker_docker-daemon_1.*
 	;;
     *)
         usage
