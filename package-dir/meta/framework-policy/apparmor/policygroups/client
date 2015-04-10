@@ -8,8 +8,8 @@
 #
 # Note: this only allows enough of the docker binary for manipulating app
 # containers. This directory needs to be in sync with docker install directory.
-@{CLICK_DIR}/docker/*/bin/docker{,.io,.x86_64,.armhf} ixr,
-@{CLICK_DIR}/docker/*/bin/auplink ixr,
+@{CLICK_DIR}/docker/*/bin/docker{,.x86_64,.armhf} ixr,
+@{CLICK_DIR}/docker/*/bin/auplink{,.x86_64,.armhf} ixr,
 
 # Tested to work with the following:
 #   docker images
