@@ -1,27 +1,29 @@
 #!/bin/bash
-
-#Get working directory:
-SNAP_APP_PATH=`pwd`
-
-#Set docker data directory:
-SNAP_APP_PDATA_PATH=/var/lib/${SNAP_APP_PATH}
-
-#Create docker data directory
-mkdir -p ${SNAP_APP_PDATA_PATH}
-mkdir -p ${SNAP_APP_PDATA_PATH}/.docker
-
-#Get docker config:
-source ${SNAP_APP_PATH}/etc/docker.conf
 PATH=$PATH:${SNAP_APP_PATH}/bin
 
+#Create docker data directory
+mkdir -p ${SNAP_APP_DATA_PATH}
+mkdir -p ${SNAP_APP_DATA_PATH}/.docker
+mkdir -p ${SNAP_APP_DATA_PATH}/etc
+
+#Copy and get docker user config:
+if [ ! -f ${SNAP_APP_DATA_PATH}/etc/docker.conf ]
+then
+echo "	cp  ${SNAP_APP_PATH}/etc/docker.conf \
+		${SNAP_APP_DATA_PATH}/etc/docker.conf"
+	cp  ${SNAP_APP_PATH}/etc/docker.conf \
+		${SNAP_APP_DATA_PATH}/etc/docker.conf
+fi
+source ${SNAP_APP_DATA_PATH}/etc/docker.conf
+
 #limit number of processes:
-#ulimit -u 1048576
+ulimit -u 1048576
 
 #limit number of open file descriptors
-#ulimit -n 1048576
+ulimit -n 1048576
 
 #Prepare env for docker:
-DOCKER_TMPDIR=${SNAP_APP_PDATA_PATH}
+DOCKER_TMPDIR=${TMPDIR}
 export http_proxy=${HTTP_PROXY} 
 export https_proxy=${HTTPS_PROXY} 
 export ftp_proxy=${FTP_PROXY} 
@@ -29,4 +31,5 @@ export ftp_proxy=${FTP_PROXY}
 #Uncomment to have docker debug messages in journalctl -f
 #DEBUG="-D" 
 
-docker ${DEBUG} -G docker -d -g ${SNAP_APP_PDATA_PATH} -H unix:///var/run/docker.sock ${DOCKER_OPTIONS}
+docker -d ${DEBUG} -G docker -g ${SNAP_APP_DATA_PATH} \
+       -H unix:///var/run/docker.sock ${DOCKER_OPTIONS}

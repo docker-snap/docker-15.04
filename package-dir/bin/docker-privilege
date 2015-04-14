@@ -1,29 +1,65 @@
 #!/bin/bash
 
+snappy_err () {
+    echo "This script needs to be run under snappy wrapper (/apps/bin)"
+    exit 1
+}
+
+#We get actual version running
+VERSION=`echo $SNAPP_APP_PATH | cut -d'/' -f4`
+if [ -z "$VERSION" ]; then snappy_err; fi
+
+#We get the actual apparmor profile
+APPARMOR_PROFILE=`ls -1 /var/lib/apparmor/profiles/*docker_docker-daemon_$VERSION | head -n 1`
+if [ ! -f "$APPARMOR_PROFILE" ]; then snappy_err; fi
+
+TEMP_PROFILE=/tmp/snaps/docker/$VERSION/tmp/docker-daemon.profile
 
 usage () {
     echo "This will enable privileged mode in docker"
     echo "To use it do:"
     echo "docker-privilege on       #to enable privilege mode"
     echo "docker-privilege off      #to disable privilege mode"
-    echo "docker-priviled status         #to display current status"
+    echo "docker-priviled status    #to display current status"
+}
+
+set-priv () {
+    sed '{s/###UNPRIVILEGED###/###PRIVILEGED###/;
+          s/^  change_profile -> docker-default,/  change_profile -> *,/;
+          s%^  #signal (send) peer=unconfined,%  signal (send) peer=unconfined,%;
+          s%^  #ptrace (read, trace) peer=unconfined,%  ptrace (read, trace) peer=unconfined,%;
+          s%^  #/dev/\*\* mrwklix,%  /dev/\*\* mrwklix,%;
+          s%^  #/proc/\*\* mrwklix,%  /proc/\*\* mrwklix,%;}' \
+          $APPARMOR_PROFILE > ${TEMP_PROFILE} 
+          mv ${TEMP_PROFILE} $APPARMOR_PROFILE
+}
+
+set-unpriv () {
+    sed '{s/###PRIVILEGED###/###UNPRIVILEGED###/;
+          s/^  change_profile -> \*,/  change_profile -> docker-default,/;
+          s%^  signal (send) peer=unconfined,%  #signal (send) peer=unconfined,%;
+          s%^  ptrace (read, trace) peer=unconfined,%  #ptrace (read, trace) peer=unconfined,%;
+          s%^  /dev/\*\* mrwklix,%  #/dev/\*\* mrwklix,%;
+          s%^  /proc/\*\* mrwklix,%  #/proc/\*\* mrwklix,%;}' \
+          $APPARMOR_PROFILE > ${TEMP_PROFILE} 
+          mv ${TEMP_PROFILE} $APPARMOR_PROFILE
 }
 
 case $1 in
     on)
         echo "enabling privilege mode"
-		sudo cp meta/docker-daemon.priv meta/docker-daemon.apparmor
-		sudo aa-profile-hook -f
-	;;
+        set-priv
+        /sbin/apparmor_parser -r $APPARMOR_PROFILE
+        ;;
     off)
         echo "disabling privilege mode"
-		sudo cp meta/docker-daemon.unpriv meta/docker-daemon.apparmor
-		sudo aa-profile-hook -f
-	;;
+        set-unpriv
+        /sbin/apparmor_parser -r $APPARMOR_PROFILE
+        ;;
     status)
         echo "Actual status (by the file, not by audit) is:"
-        grep -e "PRIVILEGED###" /var/lib/apparmor/profiles/profile_docker_docker-daemon_1.*
-	;;
+        grep -e "PRIVILEGED###" $APPARMOR_PROFILE 
+        ;;
     *)
         usage
         ;;

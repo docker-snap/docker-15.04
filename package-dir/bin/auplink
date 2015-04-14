@@ -1,25 +1,5 @@
 #!/bin/bash
-BIN_PATH=`pwd`/bin
-PATH=$PATH:$BIN_PATH
-BIN_CMD="auplink"
+PATH=$PATH:$PWD/bin
+source bin_arch
 
-function select_bin {
-    platform=`uname -i` 
-    case $platform in
-      x86_64)
-          BIN_CMD=${BIN_CMD}.x86_64
-          ;;
-      armv7l)
-          BIN_CMD=${BIN_CMD}.armhf
-          ;;
-      *)
-          echo "unknown platform for snappy-magic: $platform. remember to file a bug or better yet: fix it :)"
-          ;;
-    esac
-
-}
-
-select_bin
-${BIN_CMD} "$@"
-
-
+`select_bin auplink` "$@"

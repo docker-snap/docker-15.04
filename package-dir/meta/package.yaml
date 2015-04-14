@@ -8,8 +8,6 @@ services:
   - name: docker-daemon
     description: The docker app deployment mechanism
     start: bin/docker.start
-    stop: bin/docker.stop
-    poststop: bin/docker.poststop
     security-policy:
       apparmor: meta/docker-daemon.apparmor
       seccomp: meta/docker-daemon.seccomp

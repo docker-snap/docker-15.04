@@ -1,38 +1,8 @@
 #!/bin/bash
 BIN_PATH=`pwd`/bin
 PATH=$PATH:$BIN_PATH
-DOCKER_CMD=""
+source bin_arch
 
-#echo "**************DOCKER************************************"
-#echo PATH=$PATH; BIN_PATH=$BIN_PATH
-#echo OLD_PWD: $SNAPP_OLD_PWD
-#echo "**************DOCKER************************************"
-
-function select_docker {
-    platform=`uname -i` 
-    plat_abi=
-    # map platform to multiarch triplet - manually
-    case $platform in
-      x86_64)
-          plat_abi=x86_64-linux-gnu
-          DOCKER_CMD=docker.x86_64
-          ;;
-      armv7l)
-          plat_abi=arm-linux-gnueabihf
-          DOCKER_CMD=docker.armhf
-          ;;
-      *)
-          echo "unknown platform for snappy-magic: $platform. remember to file a bug or better yet: fix it :)"
-          ;;
-    esac
-
-}
-
-select_docker
-if [ "${SNAPP_OLD_PWD}" == "" ]; then
-	${DOCKER_CMD} "$@"
-else
-	cd ${SNAPP_OLD_PWD}
-	${DOCKER_CMD} "$@"
-fi
-
+#we ensure we are in the call directory
+cd ${SNAPP_OLD_PWD}
+`select_bin docker` "$@"

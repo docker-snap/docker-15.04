@@ -117,6 +117,10 @@
   change_profile -> docker-default,
   signal (send) peer=docker-default,
   ptrace (read, trace) peer=docker-default,
+  # This is exceedingly unfortunate but needed since privileged containers run
+  # unconfined.
+  #signal (send) peer=unconfined,
+  #ptrace (read, trace) peer=unconfined,
 
 #cf bug 1411639
   /dev/dm-* rw,
@@ -138,15 +142,14 @@
   /dev/input/ r,
   /dev/input/by-path/ r,
 
-   /proc r,
-   /dev/mapper/ r,
-   /dev/mqueue/ r,
+  /proc r,
+  /dev/mapper/ r,
+  /dev/mqueue/ r,
 
-#New need
   /dev/shm/aufs.xino rw,
   /proc/fs/aufs/plink_maint rw,
-
-#2015-04-09:
+  #/dev/** mrwklix,
+  #/proc/** mrwklix,
   /bin/chown ixr,
   capability sys_resource,
   /sbin/killall5 ixr,
