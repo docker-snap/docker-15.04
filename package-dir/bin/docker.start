@@ -9,8 +9,6 @@ mkdir -p ${SNAP_APP_DATA_PATH}/etc
 #Copy and get docker user config:
 if [ ! -f ${SNAP_APP_DATA_PATH}/etc/docker.conf ]
 then
-echo "	cp  ${SNAP_APP_PATH}/etc/docker.conf \
-		${SNAP_APP_DATA_PATH}/etc/docker.conf"
 	cp  ${SNAP_APP_PATH}/etc/docker.conf \
 		${SNAP_APP_DATA_PATH}/etc/docker.conf
 fi

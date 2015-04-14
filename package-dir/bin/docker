@@ -4,5 +4,8 @@ PATH=$PATH:$BIN_PATH
 source bin_arch
 
 #we ensure we are in the call directory
-cd ${SNAPP_OLD_PWD}
+if [ -n "${SNAPP_OLD_PWD}" ]
+then
+    cd ${SNAPP_OLD_PWD}
+fi
 `select_bin docker` "$@"
