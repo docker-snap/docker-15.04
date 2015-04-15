@@ -5,8 +5,16 @@ snappy_err () {
     exit 1
 }
 
+check_sudo () {
+    if [ "$(id -u)" != "0" ]; then
+        echo "Please use sudo to perform this action."
+        echo "    sudo /apps/bin/$0 $@"
+        exit 1
+    fi
+}
+
 #We get actual version running
-VERSION=`echo $SNAPP_APP_PATH | cut -d'/' -f4`
+VERSION=`echo $SNAP_APP_PATH | cut -d'/' -f4`
 if [ -z "$VERSION" ]; then snappy_err; fi
 
 #We get the actual apparmor profile
@@ -47,11 +55,13 @@ set-unpriv () {
 
 case $1 in
     on)
+        check_sudo
         echo "enabling privilege mode"
         set-priv
         /sbin/apparmor_parser -r $APPARMOR_PROFILE
         ;;
     off)
+        check_sudo
         echo "disabling privilege mode"
         set-unpriv
         /sbin/apparmor_parser -r $APPARMOR_PROFILE

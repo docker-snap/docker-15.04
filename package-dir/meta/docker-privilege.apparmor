@@ -197,5 +197,4 @@
 
   /sbin/apparmor_parser Uxr,
   /var/lib/apparmor/profiles/profile_docker_docker-daemon* rw,
-  /var/lib/apparmor/profiles/sed* rw,
 }
