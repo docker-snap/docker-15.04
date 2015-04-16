@@ -10,6 +10,7 @@
 # containers. This directory needs to be in sync with docker install directory.
 @{CLICK_DIR}/docker/*/bin/docker{,.x86_64,.armhf} ixr,
 @{CLICK_DIR}/docker/*/bin/auplink{,.x86_64,.armhf} ixr,
+@{CLICK_DIR}/docker/*/bin/bin_arch ixr,
 
 # Tested to work with the following:
 #   docker images
@@ -23,6 +24,7 @@
 #
 # this leaks installed apps
 @{PROC}/[0-9]*/cmdline r,
+@{PROC}/[0-9]*/stat r,
 @{PROC}/sys/net/core/somaxconn r,
 # this gives away to much privilege and needs to be fixed
 /run/docker.sock rw,
