@@ -54,6 +54,8 @@
   /writable/cache/docker/** mrwklix,
 
   # Allow our pid file and socket
+  /run/@{APP_PKGNAME}/ rw,
+  /run/@{APP_PKGNAME}/** mrwklix,
   /run/@{APP_PKGNAME}.pid rw,
   /run/@{APP_PKGNAME}.sock rw,
 

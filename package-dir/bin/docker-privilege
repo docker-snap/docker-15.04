@@ -8,7 +8,7 @@ snappy_err () {
 check_sudo () {
     if [ "$(id -u)" != "0" ]; then
         echo "Please use sudo to perform this action."
-        echo "    sudo /apps/bin/$0 $@"
+        echo "    sudo /apps/bin/docker-privilege $@"
         exit 1
     fi
 }
