@@ -90,8 +90,8 @@
        peer=(label=unconfined),
 
   # Allow execute of anything we need
-  /{,usr/}bin/* pux,
-  /{,usr/}sbin/* pux,
+  /{,usr/}bin/* puxr,
+  /{,usr/}sbin/* puxr,
 
   # Docker does all kinds of mounts all over the filesystem
   /dev/mapper/control rw,
