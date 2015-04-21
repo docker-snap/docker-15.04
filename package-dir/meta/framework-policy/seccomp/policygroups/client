@@ -5,3 +5,8 @@
 # introduces a security risk since full access to the privileged socket grants
 # privileged access to the system. Once this is resolved, this policy group
 # may be moved to 'common'.
+
+socket
+setsockopt
+bind
+capget
