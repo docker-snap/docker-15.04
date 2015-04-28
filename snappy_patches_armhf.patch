@@ -13,8 +13,8 @@ index b064076..934cdb6 100644
  #
  
 -FROM ubuntu:14.04
-+FROM armbuild/ubuntu:14.04
- MAINTAINER Tianon Gravi <admwiggin@gmail.com> (@tianon)
++FROM kickinz1/ubuntu-armhf:14.04
+#MAINTAINER Tianon Gravi <admwiggin@gmail.com> (@tianon)
  
  # Packaged dependencies
 @@ -81,11 +81,11 @@ ENV GOPATH /go:/go/src/github.com/docker/docker/vendor
