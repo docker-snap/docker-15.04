@@ -1,0 +1,9 @@
+#!/bin/bash
+PIDFILE="/var/run/docker.pid"
+
+if [ -e ${PIDFILE} ]
+then
+    kill `cat ${PIDFILE}`
+else
+    echo "Docker daemon is not running"
+fi

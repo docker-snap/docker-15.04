@@ -1,5 +1,5 @@
 name: docker
-version: 1.6.0.002
+version: 1.6.0.003
 architecture: [amd64, armhf]
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
@@ -8,6 +8,7 @@ services:
   - name: docker-daemon
     description: The docker app deployment mechanism
     start: bin/docker.start
+    stop: bin/docker.stop
     security-policy:
       apparmor: meta/docker-daemon.apparmor
       seccomp: meta/docker-daemon.seccomp

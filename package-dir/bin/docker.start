@@ -29,5 +29,13 @@ export ftp_proxy=${FTP_PROXY}
 #Uncomment to have docker debug messages in journalctl -f
 #DEBUG="-D" 
 
-docker -d ${DEBUG} -G docker -g ${SNAP_APP_DATA_PATH} \
-       -H unix:///var/run/docker.sock ${DOCKER_OPTIONS}
+docker-daemon -d ${DEBUG} -G docker -g ${SNAP_APP_DATA_PATH} \
+       -H unix:///var/run/docker.sock ${DOCKER_OPTIONS} 
+
+#We need this while waiting for more systemd instructions 
+#in package.yaml to be supported
+sleep 2
+while [ -e /var/run/docker.pid ]
+do
+    sleep 2
+done

@@ -1,20 +1,14 @@
 diff --git a/Dockerfile b/Dockerfile
-index b064076..934cdb6 100644
+index b064076..a66038a 100644
 --- a/Dockerfile
 +++ b/Dockerfile
-@@ -1,4 +1,4 @@
--# This file describes the standard way to build Docker, using docker
-+7# This file describes the standard way to build Docker, using docker
- #
- # Usage:
- #
 @@ -23,7 +23,7 @@
  # the case. Therefore, you don't have to disable it anymore.
  #
  
 -FROM ubuntu:14.04
 +FROM kickinz1/ubuntu-armhf:14.04
-#MAINTAINER Tianon Gravi <admwiggin@gmail.com> (@tianon)
+ MAINTAINER Tianon Gravi <admwiggin@gmail.com> (@tianon)
  
  # Packaged dependencies
 @@ -81,11 +81,11 @@ ENV GOPATH /go:/go/src/github.com/docker/docker/vendor
