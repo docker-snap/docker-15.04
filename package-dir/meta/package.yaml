@@ -18,7 +18,8 @@ binaries:
       - docker_client
       - networking
   - name: bin/auplink
-    security-policy:
+    security-override:
+      apparmor: meta/auplink.apparmor
       seccomp: meta/auplink.seccomp
   - name: bin/docker-privilege
     security-policy:
