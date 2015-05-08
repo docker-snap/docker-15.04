@@ -7,3 +7,18 @@ docker.svg, it is a png saved as a svg for now.
 Then copy it to  your snappy instance and install it (snappy install docker_1.3.2.00x_amd64.snap).
 
 If you need to add proxies or dns, look at meta/readme.md.
+
+
+Testing
+-------
+$ docker images
+$ docker pull ubuntu:trusty                # armbuild/ubuntu:trusty for arm
+$ docker run ubuntu:trusty uptime          # armbuild/ubuntu:trusty for arm
+$ docker run -i -t ubuntu:trusty /bin/sh   # armbuild/ubuntu:trusty for arm
+$ docker ps -l
+$ docker version
+$ docker search tutorial
+... the tutorial ...
+
+
+<more here>
