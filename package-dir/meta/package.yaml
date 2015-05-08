@@ -17,10 +17,6 @@ binaries:
     caps:
       - docker_client
       - networking
-  - name: bin/auplink
-    security-override:
-      apparmor: meta/auplink.apparmor
-      seccomp: meta/auplink.seccomp
   - name: bin/docker-privilege
     security-policy:
       apparmor: meta/docker-privilege.apparmor
