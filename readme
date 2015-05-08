@@ -12,11 +12,37 @@ If you need to add proxies or dns, look at meta/readme.md.
 Testing
 -------
 $ docker images
+EPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+
 $ docker pull ubuntu:trusty                # armbuild/ubuntu:trusty for arm
+
+$ docker images
+EPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+armbuild/ubuntu     trusty              22335e79f6fd        4 months ago        163.6 MB
+
 $ docker run ubuntu:trusty uptime          # armbuild/ubuntu:trusty for arm
+ 21:16:53 up 47 min,  0 users,  load average: 0.16, 0.07, 0.13
+
 $ docker run -i -t ubuntu:trusty /bin/sh   # armbuild/ubuntu:trusty for arm
-$ docker ps -l
+...
+# exit
+
+$ docker ps -l                             # in another terminal before exiting
+CONTAINER ID        IMAGE                    COMMAND             CREATED             STATUS              PORTS               NAMES
+80123ba0450a        armbuild/ubuntu:trusty   "/bin/sh"           7 seconds ago       Up 5 seconds                            ecstatic_newton
+
 $ docker version
+Client version: 1.6.0
+Client API version: 1.18
+Go version (client): go1.4.2
+Git commit (client): b6d9ed8
+OS/Arch (client): linux/arm
+Server version: 1.6.0
+Server API version: 1.18
+Go version (server): go1.4.2
+Git commit (server): b6d9ed8
+OS/Arch (server): linux/arm
+
 $ docker search tutorial
 ... the tutorial ...
 
