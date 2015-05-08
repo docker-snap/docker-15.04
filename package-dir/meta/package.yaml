@@ -1,5 +1,5 @@
 name: docker
-version: 1.6.0.003
+version: 1.6.1.002
 architecture: [amd64, armhf]
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
@@ -17,6 +17,9 @@ binaries:
     caps:
       - docker_client
       - networking
+  - name: bin/auplink
+    security-policy:
+      seccomp: meta/auplink.seccomp
   - name: bin/docker-privilege
     security-policy:
       apparmor: meta/docker-privilege.apparmor
