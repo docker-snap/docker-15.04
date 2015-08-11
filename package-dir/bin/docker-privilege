@@ -21,7 +21,8 @@ if [ -z "$VERSION" ]; then snappy_err; fi
 APPARMOR_PROFILE=`ls -1 /var/lib/apparmor/profiles/*docker_docker-daemon_$VERSION | head -n 1`
 if [ ! -f "$APPARMOR_PROFILE" ]; then snappy_err; fi
 
-TEMP_PROFILE=/tmp/snaps/docker/$VERSION/tmp/docker-daemon.profile
+mkdir -p $SNAP_APP_DATA_PATH/tmp
+TEMP_PROFILE=$SNAP_APP_DATA_PATH/tmp/docker-daemon.profile
 
 usage () {
     echo "This will enable privileged mode in docker"

@@ -15,10 +15,10 @@ fi
 source ${SNAP_APP_DATA_PATH}/etc/docker.conf
 
 #limit number of processes:
-ulimit -u 1048576
+ulimit -u 8192
 
 #limit number of open file descriptors
-ulimit -n 1048576
+ulimit -n 8192
 
 #Prepare env for docker:
 DOCKER_TMPDIR=${TMPDIR}
@@ -34,8 +34,8 @@ docker-daemon -d ${DEBUG} -G docker -g ${SNAP_APP_DATA_PATH} \
 
 #We need this while waiting for more systemd instructions 
 #in package.yaml to be supported
-sleep 2
+sleep 10
 while [ -e /var/run/docker.pid ]
 do
-    sleep 2
+    sleep 1
 done

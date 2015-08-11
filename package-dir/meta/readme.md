@@ -1,7 +1,7 @@
 Docker Framework
 This is the docker app deployment mechanism.
 
-Actual docker version: 1.6.1
+Actual docker version: 1.6.2
 
 Apparmor profiles have been moved to /var/lib/apparmor/profiles, default profile as been modified.
 Data is stored in /var/lib/apps/docker/${version_of_snap_package}/.
@@ -15,6 +15,6 @@ DOCKER_OPTIONS="--dns 8.8.8.8"
 
 If you need privileged access, you can issue 'docker-privilege on'. But the confinment will be nearly inexistant.
 
-docker can read and write to your home/apps/docker/** directory, place your Dockerfile, there.
+Docker can read and write to your home/apps/docker/** directory, place your Dockerfile, there.
 
 sudo systemctl restart docker_docker_${version_of_snap_package}.service

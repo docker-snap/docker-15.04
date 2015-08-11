@@ -1,4 +1,4 @@
-For building docker, you need to be either in a vivid vm or a bare host. 
+For building docker, you need to be either in a >vivid vm or a bare host. 
 It doesn't work in a container as building process is done in a docker container, you need direct connection to internet, the build process fails even if env proxies are set in the container.
 
 to build it:
@@ -6,10 +6,12 @@ apt-get install git docker.io make
 
 then:
 git clone https://git@github.com/docker/docker
-git checkout release-1.6
+git checkout v1.6.2
 git apply snappy_patches_ARCH.patch
 
 You can also get it from gihutb: https://github.com/kickinz1/docker
+armhf branch is:docker4snappy-1.6.2-armhf
+amd64 branch is:docker4snappy-1.6.2-amd64
 
 then sudo make, and wait for it to be build
 the binary that we need will be in bundles/1.6.x/binary/

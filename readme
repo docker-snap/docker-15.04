@@ -1,12 +1,45 @@
+Docker Framework
+This is the docker app deployment mechanism.
+
+Actual docker version: 1.6.2
+
+Apparmor profiles have been moved to /var/lib/apparmor/profiles, default profile as been modified.
+Data is stored in /var/lib/apps/docker/${version_of_snap_package}/.
+
+If you need to pass through proxies or dns, edit /apps/docker/current/etc/docker.conf accordingly and restart the docker service:
+i.e:
+FTP_PROXY=http://your.proxy:3128
+HTTP_PROXY=http://your.proxy:3128
+HTTPS_PROXY=http://your.proxy:3128
+DOCKER_OPTIONS="--dns 8.8.8.8"
+
+If you need privileged access, you can issue 'docker-privilege on'. But 
+the confinment will be nearly inexistant.
+
+User data is in $HOME/apps/docker/1.6.2.001
+Docker can read and write to your home/apps/docker/** directory, place your Dockerfile, there.
+ie:
+	cd /home/ubuntu/apps/docker/1.6.2.001/
+	echo "FROM ubuntu:latest" > Dockerfile
+	docker build .
+	docker save -o my_image.tar IMAGE_UUID
+	docker load -i my_image.tar
+
+All of the commands that require docker to read local files must be done
+within the $HOME/apps/docker/$Version/ dir or with full path to this dir
+added.
+
+sudo systemctl restart docker_docker_${version_of_snap_package}.service
+
+## Notes:
+
 If you want to build it just issue:
 snappy build package-dir
 
 Known issues so far:
 docker.svg, it is a png saved as a svg for now.
 
-Then copy it to  your snappy instance and install it (snappy install docker_1.3.2.00x_amd64.snap).
-
-If you need to add proxies or dns, look at meta/readme.md.
+Then copy it to  your snappy instance and install it (snappy install docker_VERSION_ARCH.snap).
 
 
 Testing
@@ -32,19 +65,18 @@ CONTAINER ID        IMAGE                    COMMAND             CREATED        
 80123ba0450a        armbuild/ubuntu:trusty   "/bin/sh"           7 seconds ago       Up 5 seconds                            ecstatic_newton
 
 $ docker version
-Client version: 1.6.0
+Client version: 1.6.2
 Client API version: 1.18
 Go version (client): go1.4.2
-Git commit (client): b6d9ed8
-OS/Arch (client): linux/arm
-Server version: 1.6.0
+Git commit (client): a464a34 #OR 8f2d6e5
+OS/Arch (client): linux/arm  #OR linux/amd64
+Server version: 1.6.2
 Server API version: 1.18
 Go version (server): go1.4.2
-Git commit (server): b6d9ed8
-OS/Arch (server): linux/arm
+Git commit (server): a464a34 #OR 8f2d6e5
+OS/Arch (server): linux/arm  #OR linux/amd64
 
 $ docker search tutorial
 ... the tutorial ...
-
 
 <more here>
