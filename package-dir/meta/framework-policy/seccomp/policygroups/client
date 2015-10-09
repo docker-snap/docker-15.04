@@ -10,3 +10,4 @@ socket
 setsockopt
 bind
 capget
+lchown

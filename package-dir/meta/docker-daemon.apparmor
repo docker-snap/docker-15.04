@@ -157,4 +157,7 @@
   /sbin/killall5 ixr,
   /sbin/dmsetup ixr,
   /sbin/iptables ixr,
+
+#cf bug 1502785
+  / r,
 }
