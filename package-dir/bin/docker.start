@@ -15,10 +15,10 @@ fi
 source ${SNAP_APP_DATA_PATH}/etc/docker.conf
 
 #limit number of processes:
-ulimit -u 8192
+ulimit -u 1048576
 
 #limit number of open file descriptors
-ulimit -n 8192
+ulimit -n 1048576
 
 #Prepare env for docker:
 DOCKER_TMPDIR=${TMPDIR}

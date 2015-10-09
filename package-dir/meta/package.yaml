@@ -1,5 +1,5 @@
 name: docker
-version: 1.6.2.002
+version: 1.6.2.003
 architecture: [amd64, armhf]
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
