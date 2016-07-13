@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+
+self="$(basename "$0")"
+
+cmd="$self"
+if [ "$self" = '_arch_bin' ]; then
+	# ideally, this "if" would use "readlink" to perform magic, but "snappy build" does not preserve symlinks
+	cmd="$1"
+	shift
+fi
+
+archBinsDir="$SNAP_APP_PATH/bin/$SNAP_ARCH"
+export PATH="$archBinsDir:$SNAP_APP_PATH/bin:$PATH"
+export LD_LIBRARY_PATH="$SNAP_APP_PATH/lib/$SNAP_ARCH:$PATH"
+
+if [ -n "$SNAP_OLD_PWD" ]; then
+	cd "$SNAP_OLD_PWD"
+fi
+
+exec -- "$archBinsDir/$cmd" "$@"

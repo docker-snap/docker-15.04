@@ -1,5 +1,1 @@
-#!/bin/bash
-PATH=$PATH:$PWD/bin
-source bin_arch
-
-`select_bin auplink` "$@"
+_arch_bin

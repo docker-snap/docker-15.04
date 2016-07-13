@@ -1,11 +1,1 @@
-#!/bin/bash
-BIN_PATH=`pwd`/bin
-PATH=$PATH:$BIN_PATH
-source $BIN_PATH/bin_arch
-
-#we ensure we are in the call directory
-if [ -n "${SNAP_OLD_PWD}" ]
-then
-    cd ${SNAP_OLD_PWD}
-fi
-`select_bin docker` "$@"
+_arch_bin

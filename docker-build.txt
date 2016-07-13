@@ -1,18 +1,7 @@
-For building docker, you need to be either in a >vivid vm or a bare host. 
-It doesn't work in a container as building process is done in a docker container, you need direct connection to internet, the build process fails even if env proxies are set in the container.
+We leverage the newer-style "snapcraft" build for building Docker here.  You will need both an "amd64" and an "armhf" 16.04+ host with functional snapcraft in order to compile binaries for this 15.04-style snap.
 
-to build it:
-apt-get install git docker.io make
+$ git clone --single-branch https://github.com/infosiftr/snap-docker.git
+$ cd snap-docker
+$ ./build-static-bins.sh
 
-then:
-git clone https://git@github.com/docker/docker
-git checkout v1.6.2
-git apply snappy_patches_ARCH.patch
-
-You can also get it from gihutb: https://github.com/kickinz1/docker
-armhf branch is:docker4snappy-1.6.2-armhf
-amd64 branch is:docker4snappy-1.6.2-amd64
-
-then sudo make, and wait for it to be build
-the binary that we need will be in bundles/1.6.x/binary/
-
+When finished, copy the contents of the "static-bins" directory, replacing either "package-dir/bin/amd64" or "package-dir/bin/armhf" (as appropriate).

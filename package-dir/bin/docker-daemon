@@ -1,11 +1,43 @@
 #!/bin/bash
-BIN_PATH=`pwd`/bin
-PATH=$PATH:$BIN_PATH
-source bin_arch
+set -e
 
-#we ensure we are in the call directory
-if [ -n "${SNAP_OLD_PWD}" ]
-then
-    cd ${SNAP_OLD_PWD}
+export PATH="$PATH:$SNAP_APP_PATH/bin"
+
+# Create docker data directory
+mkdir -p \
+	"$SNAP_APP_DATA_PATH/.docker" \
+	"$SNAP_APP_DATA_PATH/etc" \
+	"$SNAP_APP_DATA_PATH/run/docker"
+
+# Copy and get docker user config
+if [ ! -f "$SNAP_APP_DATA_PATH/etc/docker.conf" ]; then
+	cp \
+		"$SNAP_APP_PATH/etc/docker.conf" \
+		"$SNAP_APP_DATA_PATH/etc/docker.conf"
 fi
-`select_bin docker` "$@" &
+source "$SNAP_APP_DATA_PATH/etc/docker.conf"
+
+# limit number of processes:
+ulimit -u 1048576
+
+# limit number of open file descriptors
+ulimit -n 1048576
+
+# Prepare env for docker
+export DOCKER_TMPDIR="${TMPDIR}"
+export http_proxy="${HTTP_PROXY}"
+export https_proxy="${HTTPS_PROXY}"
+export ftp_proxy="${FTP_PROXY}"
+
+# Uncomment to have docker debug messages in journalctl -f
+DEBUG="--debug --log-level debug"
+
+exec -- docker \
+	daemon \
+	${DEBUG} \
+	--exec-root "$SNAP_APP_DATA_PATH/run/docker" \
+	--graph "$SNAP_APP_DATA_PATH" \
+	--group docker \
+	--host unix:///var/run/docker.sock \
+	--pidfile "$SNAP_APP_DATA_PATH/run/docker.pid" \
+	${DOCKER_OPTIONS}
