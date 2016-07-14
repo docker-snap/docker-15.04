@@ -59,6 +59,10 @@
   /run/@{APP_PKGNAME}.pid rw,
   /run/@{APP_PKGNAME}.sock rw,
 
+  # Allow docker-runc to use /run/runc
+  /run/runc/   rw,
+  /run/runc/** mrwklix,
+
   # Wide read access to /proc, but somewhat limited writes for now
   @{PROC}/ r,
   @{PROC}/** r,
