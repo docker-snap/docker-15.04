@@ -5,7 +5,6 @@ self="$(basename "$0")"
 
 cmd="$self"
 if [ "$self" = '_arch_bin' ]; then
-	# ideally, this "if" would use "readlink" to perform magic, but "snappy build" does not preserve symlinks
 	cmd="$1"
 	shift
 fi
