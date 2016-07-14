@@ -1,0 +1,5 @@
+- AppArmor
+  - TODO determine how much modification is really necessary
+- seccomp
+  - attempting to kill containers results in `permission denied`
+- lots more testing (especially looking for more "permission denied" seccomp/AppArmor issues)
