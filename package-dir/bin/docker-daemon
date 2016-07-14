@@ -24,10 +24,13 @@ ulimit -u 1048576
 ulimit -n 1048576
 
 # Prepare env for docker
-export DOCKER_TMPDIR="${TMPDIR}"
 export http_proxy="${HTTP_PROXY}"
 export https_proxy="${HTTPS_PROXY}"
 export ftp_proxy="${FTP_PROXY}"
+
+# this _should_ be Docker's default value, but with AppArmor in the mix it's safer if we're explicit about it
+export DOCKER_TMPDIR="${SNAP_APP_DATA_PATH}/tmp"
+mkdir -p "$DOCKER_TMPDIR"
 
 # Uncomment to have docker debug messages in journalctl -f
 DEBUG="--debug --log-level debug"
