@@ -69,6 +69,7 @@
   @{PROC}/[0-9]*/attr/exec w,
   @{PROC}/sys/net/** w,
   @{PROC}/[0-9]*/cmdline r,
+  @{PROC}/[0-9]*/oom_score_adj w,
 
   # Wide read access to /sys
   /sys/** r,
@@ -109,6 +110,8 @@
 
   # for console access
   /dev/ptmx rw,
+  # file descriptors (/proc/NNN/fd/X)
+  /[0-9]*   rw,
 
   # For loading the docker-default policy. We might be able to get rid of this
   # if we load docker-default ourselves and make docker not do it.
