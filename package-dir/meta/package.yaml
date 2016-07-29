@@ -16,6 +16,10 @@ binaries:
     caps:
       - docker_client
       - network-client
+  - name: bin/docker-compose
+    caps:
+      - docker_client
+      - network-client
   - name: bin/docker-privilege
     security-policy:
       apparmor: meta/docker-privilege.apparmor
