@@ -37,3 +37,7 @@
 deny capability net_admin,
 deny /sbin/xtables-multi x,
 deny @{PROC}/[0-9]*/mountinfo r,
+
+# Allow access to user's HOME (replaced by the ":home" interface in 16-series)
+owner @{HOME}/   r,
+owner @{HOME}/** rwk,

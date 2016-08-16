@@ -16,5 +16,3 @@ If you need to pass through proxies or adjust default DNS for your containers, e
 Restarting the daemon can be accomplished via `sudo systemctl restart docker_docker-daemon_${version_of_snap_package}.service`.
 
 If you need privileged access in containers (`docker run --privileged`), you can issue `docker-privilege on` (disable again with `docker-privilege off` and check the current configuration with `docker-privilege status`); however, be forewarned: the confinement will be nearly nonexistent (full root access to the host system is possible).
-
-Docker can read and write to your `$HOME/apps/docker/**` directory, so Dockerfiles, etc should be placed there.
