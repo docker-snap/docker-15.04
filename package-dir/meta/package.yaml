@@ -1,5 +1,5 @@
 name: docker
-version: 1.11.2-2
+version: 1.11.2-3~snap15.04
 architectures: [amd64, armhf]
 icon: meta/docker.svg
 vendor: Pierre-Andre MOREY <pierre-andre.morey@canonical.com>
